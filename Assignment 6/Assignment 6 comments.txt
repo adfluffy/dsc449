@@ -1,0 +1,78 @@
+# Part 1
+
+# After running the modelCompare function on the three RGB regressions it becomes
+# apparent that the third model format (X1~X2) has the strongest relationship.
+# This is based on the .3 regression format having the highest r value, adjusted
+# r squared, and independent variable t-score across all colors. However, since
+# we are more interested in determining the strength of a model that can match a
+# known RGB value to the RGB values determined by a sensor, this relationship is
+# not incredibly useful. Instead, we will perform the modelCompare operation again
+# but this time only on regression models 1 and 2. This should tell us whether the
+# X1 or X2 method of sensor arrangement is better equipped to perceive the RGB values
+# of the paint we are studying. 
+
+# In the new data frame (rgb.summary.1.2) we can see now that regression test 2
+# (X~X2) provides the more compelling model. Regression model 3 (X1~X2) measured
+# the ability to determine a sensor reading (X1) from another sensor reading (X2).
+# This can be useful in determining if the sensor is operating reliably, but if we
+# are instead interested in a regression model that allows us to determine a paint
+# color from a sensor reading then regression model 2 provides use with that. The
+# adjusted r squared values for model 2 are:
+#    (Adjusted R Squared)
+#    red   -> 0.8769735
+#    green -> 0.9343078
+#    blue  -> 0.8273811
+# These adjusted r squared values indicate that test 2 is a strong predictor of
+# the true color of paint presented to the sensor. Additionally, the model 2 r
+# squared values (below) similarly show that the model is a good fit for the 
+# data that we provided:
+#    (R Squared)
+#    red   -> 0.8808181
+#    green -> 0.9363607
+#    blue  -> 0.8327755
+# (This summary information is all available within the rgb.summary.1.2 data frame)
+# All this data implies that black hose washer providing light shielding to the 
+# sensor improves its ability to detect colors accurately.
+
+
+# Finally, after running the modelComapre function on the color_calb associated
+# models we can determine that regression model 2 (X~X.LED.on.) performs better
+# than model 1 (X~X.[Color]). The adjusted r squared values for the colors tested
+# are:
+#    (Adjusted R Squared)
+#    red   -> 0.8496817
+#    green -> 0.9223584
+#    blue  -> 0.8044472
+# This adjusted r squared values imply that the models are able to predict the actual
+# paint color relatively well, and when combined with their r squared values (below)
+# we can see that the model is the more robust option.
+#    (R Squared)
+#    red   -> 0.8533480
+#    green -> 0.9242521
+#    blue  -> 0.8092168
+# (Summary information provided above is all availible in the calb.summary data frame)
+# Since we are trying to determine the best set up method for the light sensor on
+# the arduino board, the regression models created here imply that the white light
+# LED is better for allowing the sensor to determine the paint color presented
+# to it. 
+
+#*******************************************************************************
+# Part 2
+
+# Based on the results of the dominance analysis performed on the bc.data data frame
+# the most influencital factors on malignancy are:
+# 1) Bare Nuclei            (0.144)    
+# 2) Cell Shape Uniformity  (0.130)
+# 3) Cell Size Uniformity   (0.125)
+# 4) Clump Thickness        (0.111)
+# 5) Bland Chromatin        (0.105)
+# 6) Marginal Adhesion      (0.077)
+# 7) Normal Nucleoli        (0.076)
+# 8) Single Epithelial Cell (0.073)
+# 9) Mitoses                (0.034)
+# Additionally, parsing the information in the bm.complete, bm.conditional, and
+# bm.general matrices will give information on the dominance of factors in the 
+# model (1 means dominant, 0 means submissive,0.5 means not determinable). Alternatively,
+# the dom.factors vector is a list of factors and their dominance status over other
+# factors in the model. Either review method will yield the user more information
+# regarding factor dominance in the model. 
