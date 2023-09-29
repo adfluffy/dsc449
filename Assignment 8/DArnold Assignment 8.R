@@ -10,7 +10,7 @@ library(sf)
 setwd("F:/Users/Devan/Documents/Education/DSC449/Assignments/Assignment 8")
 
 # Registers my Google Maps API key
-register_google(key="AIzaSyAP8UnKOEWXDWGtwaR6jkWe9YagOQUmaZc")
+register_google(key="")
 
 # Creates a data frame from the MaineHighSchool CSV found in my working directory
 high_schools <- read.csv("MaineHighSchools.csv",header=TRUE)
