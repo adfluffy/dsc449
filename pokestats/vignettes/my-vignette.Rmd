@@ -1,0 +1,167 @@
+---
+title: "Intro to Pokestats"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{my-vignette}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Introduction
+
+Hello, and welcome to the pokestat package for R. This package is
+designed to assist in the creation, training, and analysis of
+competitive Pokemon teams. Included in this document, along with code
+examples and usage, are a list of additional resources for those looking
+to get the most out of this set of tools.
+
+# Getting Started
+
+To get started, install the pokestats library into your R session
+
+```{r setup}
+library(pokestats)
+```
+
+# Data Sets
+
+Included with the pokestats package are the following data sets:
+
+## abilityData 
+
+- data on all pokemon abilities
+    -   Ability number
+    -   Ability identifier
+    -   Ability name
+    -   Ability rating
+    
+## natureData 
+
+- data on all pokemon natures
+    -   Nature number
+    -   Nature name
+    -   Stat increased by nature
+    -   Stat decreased by nature
+    -   Preferred flavor of nature
+    -   Disliked flavor of nature
+    -   Attack stat multiplier
+    -   Defense stat multiplier
+    -   Special Attack stat multiplier
+    -   Special Defense stat multiplier
+    -   Speed stat multiplier
+    
+## pokemonData 
+
+- data on all pokemon up to scarlet and violet
+    -   Pokemon ID number
+    -   Pokemon National Pokedex Number
+    -   Pokemon name
+    -   Pokemon form
+    -   Pokemon unique identifier (name + form)
+    -   Primary type
+    -   Secondary type
+    -   Base Hit Point stat
+    -   Base Attack stat
+    -   Base Defense stat
+    -   Base Special Attack stat
+    -   Base Special Defense stat
+    -   Base Speed stat
+    -   Base Stat Total
+    -   Mean height
+    -   Mean Weight
+    -   Ability 1 number
+    -   Ability 2 number
+    -   Hidden Ability number
+    
+## regD 
+
+- the list of all eligible pokemon in the regulation D format
+    -   National Pokedex Number
+    -   Pokemon identifier (name + form)
+    
+## worlds23Data 
+
+- data on all day 2 participants in the 2023 World Championship Tournament
+    -   Placement
+    -   Wins prior to top 32 bracket
+    -   Losses prior to top 32 bracket
+    -   Team slot 1
+    -   Team slot 2
+    -   Team slot 3
+    -   Team slot 4
+    -   Team slot 5
+    -   Team slot 6
+    -   Player first name
+    -   Player last name
+    -   Player country of origin
+    -   Player in-game name (IGN)
+
+# Usage
+
+Below are examples of how you can utilize the tools within the package
+for pokemon generation, team building, and training.
+
+## Create New Pokemon
+
+Using the `generatePokemon()` function you can create a new pokemon data
+frame that can either be used on its own or added to a team.
+
+```{r}
+my_first_pokemon <- generatePokemon(targetPokemon = 'pikachu')
+my_first_pokemon
+```
+
+This function creates a data frame of size 33x1. The remaing function
+within the package uses this defined pokemon data frame to peform other
+functions, such as creating a new team. 
+
+## Create New Team
+
+The `newTeam()` function allows you to create a new team data frame
+populated with either random pokemon or pokemon that the user passes
+into the function.
+
+```{r}
+newTeam(slot1 = 'pikachu')
+```
+
+## Add or remove from existing team
+
+The `exchangeTeamSlot()` function allows you to either remove a pokemon from a team (replacing the slot with empty values) or replace a slot on your team with a new pokemon. 
+
+```{r}
+pikachu <- generatePokemon('pikachu')
+myTeam <- newTeam(slot1 = 'raichu')
+
+myTeam <- exchangeTeamSlot(team = myTeam,replace = 1,newPokemon = pikachu)
+```
+
+## Calculate the stat value of a pokemon
+
+The `statCalc()` function can be used to calculate the stat value for a given pokemon under different conditions. By providing the pokemon, desired stat, nature, individual vale for the stat, the effort value points of the stat, and the pokemon level this function can determine what the numeric stat value would be. 
+
+```{r}
+statCalc(poke = 'pikachu', stat = 'SPE', statIV = 10, statEV = 252,nature = 'timid')
+```
+
+## Apply  Effort Value (EV) points to a pokemon
+
+The `evTrain()` function can be used to add or remove the effort value points for a specified pokemon. 
+
+```{r}
+my_pika <- generatePokemon('pikachu')
+my_pika
+
+my_pika <- evTrain(targetPoke = my_pika,spaMax = TRUE,speMax = TRUE,hpFill = TRUE)
+my_pika
+```

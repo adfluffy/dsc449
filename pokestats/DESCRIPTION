@@ -1,0 +1,18 @@
+Package: pokestats
+Type: Package
+Title: Pokemon Teambuilding tools
+Version: 0.1.0
+Date: 8/19/2023
+Author: Devan Arnold
+Maintainer: Devan Arnold <devan.arnold@maine.edu>
+Description: This package uses data from the Pokemon Scarlet and violet titles
+    in conjunction with data from the 2023 Pokemon World Championship to provide
+    statistical tools for team building and meta game analysis.
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.2.3
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
